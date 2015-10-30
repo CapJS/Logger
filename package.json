@@ -1,0 +1,30 @@
+{
+  "name": "cap-logger",
+  "version": "1.0.0",
+  "description": "A Syslog based on the standard RFC 5424.",
+  "main": "lib/logger.js",
+  "dependencies": {
+    "lodash": "^3.10.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src/ --out-dir lib/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CapJS/Logger.git"
+  },
+  "keywords": [
+    "log",
+    "logger",
+    "utilities",
+    "util"
+  ],
+  "author": "Jon Dotsoy <hi@jon.soy>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CapJS/Logger/issues"
+  },
+  "homepage": "https://github.com/CapJS/Logger#readme"
+}
