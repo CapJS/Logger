@@ -1,6 +1,31 @@
 # Logger
 
-A [Syslog](https://en.wikipedia.org/wiki/Syslog) based on the standard [RFC 5424](https://tools.ietf.org/html/rfc5424).
+A [Syslog](https://en.wikipedia.org/wiki/Syslog) based on the standard [RFC 5424](https://tools.ietf.org/html/rfc5424#page-11).
+
+
+
+### Syslog Message Severities
+
+| Numerical Code | Severity |
+| -------------- | --- |
+| 0 | **Emergency**: system is unusable |
+| 1 | **Alert**: action must be taken immediately |
+| 2 | **Critical**: critical conditions |
+| 3 | **Error**: error conditions |
+| 4 | **Warning**: warning conditions |
+| 5 | **Notice**: normal but significant condition |
+| 6 | **Informational**: informational messages |
+| 7 | **Debug**: debug-level messages |
+
+
+
+### Additional Codes
+
+| Numerical Code | Severity |
+| -------------- | --- |
+| -2 | **Hidden**: hidden all messages that using this logger. |
+| -1 | **None**: is undefined |
+
 
 
 ## Installation
@@ -53,14 +78,14 @@ log.warn("The Consol has log.");
 The Logs Level are a indicator to show depending the level defined en los loggers.
 
 - `logger.log()`
-- `logger.emergency()` abbr `logger.emerg()`
+- `logger.emergency()` abbreviated `logger.emerg()`
 - `logger.alert()`
-- `logger.critical()` abbr `logger.crit()`
-- `logger.error()` abbr `logger.err()`
-- `logger.warning()` abbr `logger.warn()`
+- `logger.critical()` abbreviated `logger.crit()`
+- `logger.error()` abbreviated `logger.err()`
+- `logger.warning()` abbreviated `logger.warn()`
 - `logger.notice()`
-- `logger.informational()` abbr `logger.info()`
-- `logger.debug()` abbr `logger.deb()`
+- `logger.informational()` abbreviated `logger.info()`
+- `logger.debug()` abbreviated `logger.deb()`
 
 
 Example:
