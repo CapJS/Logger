@@ -1,6 +1,6 @@
 {
   "name": "cap-logger",
-  "version": "1.0.1-dev",
+  "version": "1.0.1",
   "description": "A Syslog based on the standard RFC 5424.",
   "main": "lib/logger.js",
   "dependencies": {
