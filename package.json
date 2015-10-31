@@ -6,7 +6,9 @@
   "dependencies": {
     "lodash": "^3.10.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel": "^6.0.14"
+  },
   "scripts": {
     "build": "babel src/ --out-dir lib/ -s"
   },
