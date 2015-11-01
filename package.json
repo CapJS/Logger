@@ -1,9 +1,10 @@
 {
   "name": "cap-logger",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "description": "A Syslog based on the standard RFC 5424.",
   "main": "lib/logger.js",
   "dependencies": {
+    "colors": "^1.1.2",
     "lodash": "^3.10.1"
   },
   "devDependencies": {
@@ -11,7 +12,7 @@
     "babel-cli": "^6.0.14"
   },
   "scripts": {
-    "build": "babel src/ --out-dir lib/ -s"
+    "transpile": "babel src/logger.js -o lib/logger.js -e 4 -s"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,6 @@
 // var _ = require("lodash");
 import _ from "lodash";
+import colors from "colors/safe";
 
 /*
 * REF: https://en.wikipedia.org/wiki/Syslog
@@ -11,12 +12,31 @@ class logger {
     sufix = null,
     logger:_logger = console.log,
     priority = process.env.DEBUG,
-    defaultLevelLog = process.env.LOGGER_DEFAULT_LEVEL || -1, // Default Level to logger.log()
+    defaultLevelLog = process.env.LOGGER_DEFAULT_LEVEL || -1,
+    colorful = true,
+    colors: set_colors = {},
+    printLevel = true,
   } = {}) {
     this.defaultLevelLog = defaultLevelLog;
     this.prefix = prefix;
     this.sufix = sufix;
+    this.colorful = colorful;
+    this.printLevel = printLevel;
     this._logger = _logger;
+    // this.logger = logger;
+
+    colors.setTheme({
+      "custom-2": _.get(set_colors, "hidden", "reset"),
+      "custom-1": _.get(set_colors, "none", "reset"),
+      "custom0": _.get(set_colors, "emergency", "yellow"),
+      "custom1": _.get(set_colors, "alert", "yellow"),
+      "custom2": _.get(set_colors, "critical", "red"),
+      "custom3": _.get(set_colors, "error", "red"),
+      "custom4": _.get(set_colors, "warning", "yellow"),
+      "custom5": _.get(set_colors, "notice", "cyan"),
+      "custom6": _.get(set_colors, "informational", "green"),
+      "custom7": _.get(set_colors, "debug", "reset"),
+    });
 
     this.priority = logger.getLevelNumber(priority);
 
@@ -27,7 +47,7 @@ class logger {
       let date = new Date();
       return `[${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]`;
     } else {
-      if (typeof(this.prefix) == "function") {
+      if (_.isFunction(this.prefix)) {
         return this.prefix();
       } else {
         return this.prefix;
@@ -39,7 +59,7 @@ class logger {
     if (this.sufix == null) {
       return '';
     } else {
-      if (typeof(this.sufix) == "function") {
+      if (_.isFunction(this.sufix)) {
         return this.sufix();
       } else {
         return this.sufix;
@@ -101,7 +121,7 @@ class logger {
 
   static getLevelName (level) {
     let ret = "";
-    switch (logger.getLevelName(level)) {
+    switch (logger.getLevelNumber(level)) {
       case 0:  ret = "emergency"; break;
       case 1:  ret = "alert"; break;
       case 2:  ret = "critical"; break;
@@ -114,10 +134,32 @@ class logger {
     return ret.toUpperCase();
   }
 
+  colorLevel (levelNumber) {
+
+  }
+
   logger (level, ...args) {
     if (!_.isNumber(level)) throw new Error("Logger is not defined level logger.logger(level, ...args);");
     if (this.priority < level) return false;
-    return this._logger(this.getPrefix(), `${logger.getLevelName(level)}:`, ...args, this.getSufix());
+
+    let prefix = this.getPrefix();
+    let sufix = this.getSufix();
+
+
+    if (this.printLevel) {
+      args = [_.get(colors, `custom${level}`, (...a) => a)(`${logger.getLevelName(level)}:`), ...args];
+    }
+
+    if (prefix) {
+      args = [prefix, ...args];
+    }
+
+    if (sufix) {
+      args = [...args, sufix];
+    }
+
+
+    return this._logger(...args);
   }
 
   // this.defaultLevelLog Default -1.
