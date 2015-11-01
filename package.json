@@ -12,7 +12,7 @@
     "babel-cli": "^6.0.14"
   },
   "scripts": {
-    "build": "babel src/ --out-dir lib/"
+    "transpile": "babel src/logger.js -o lib/logger.js -e 4 -s"
   },
   "repository": {
     "type": "git",
